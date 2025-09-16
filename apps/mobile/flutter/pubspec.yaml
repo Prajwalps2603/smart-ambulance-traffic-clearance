@@ -1,0 +1,21 @@
+name: smart_ambulance_mobile
+description: Mobile app to start ambulance mission and send live location
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  geolocator: ^10.1.0
+  flutter_spinkit: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

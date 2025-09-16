@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "ms-vscode.vscode-typescript-next",
+    "ms-azuretools.vscode-docker",
+    "dart-code.flutter",
+    "vsciot-vscode.vscode-arduino"
+  ]
+}

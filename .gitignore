@@ -1,0 +1,16 @@
+# Node
+node_modules
+dist
+.env
+# Flutter
+build
+.dart_tool
+.packages
+pubspec.lock
+# IDE
+.vscode
+.idea
+.DS_Store
+# Dashboard
+apps/dashboard/node_modules
+apps/dashboard/dist

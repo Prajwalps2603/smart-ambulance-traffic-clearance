@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend-build:
+    name: Backend TypeScript build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: apps/backend/package-lock.json
+      - run: npm ci
+      - run: npm run build
+
+  firmware-compile:
+    name: Firmware compile (Arduino CLI)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+        with:
+          version: latest
+      - name: Install ESP32 core
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+      - name: Compile smart_pole
+        run: |
+          arduino-cli compile --fqbn esp32:esp32:esp32 ./firmware/esp32/smart_pole
+      - name: Compile traffic_light
+        run: |
+          arduino-cli compile --fqbn esp32:esp32:esp32 ./firmware/esp32/traffic_light
