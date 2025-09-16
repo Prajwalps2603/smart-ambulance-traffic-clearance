@@ -16,6 +16,15 @@ app.get("/health", (_req: Request, res: Response) => res.json({ ok: true }));
 
 app.use("/api/v1/missions", missionsRouter);
 
+// After you create `app`
+app.get("/", (_req, res) => {
+  res.json({
+    ok: true,
+    service: "smart-ambulance-backend",
+    health: "/health",
+    docs: "/api/v1/missions"
+  });
+});
 
 const PORT = Number(process.env.PORT || 8080);
 const MQTT_BROKER = process.env.MQTT_BROKER_URL || "mqtt://localhost:1883";
