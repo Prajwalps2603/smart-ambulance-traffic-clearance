@@ -28,11 +28,11 @@ export default function MapView({ mission }: { mission: Mission | null }) {
   }, [mission]);
 
   const path = useMemo(() => {
-    if (!mission) return [];
-    const pts = [];
-    pts.push([mission.origin.lat, mission.origin.lng] as [number, number]);
-    if (mission.lastLocation) pts.push([mission.lastLocation.lat, mission.lastLocation.lng] as [number, number]);
-    pts.push([mission.destination.lat, mission.destination.lng] as [number, number]);
+    if (!mission) return [] as [number, number][];
+    const pts: [number, number][] = [];
+    pts.push([mission.origin.lat, mission.origin.lng]);
+    if (mission.lastLocation) pts.push([mission.lastLocation.lat, mission.lastLocation.lng]);
+    pts.push([mission.destination.lat, mission.destination.lng]);
     return pts;
   }, [mission]);
 

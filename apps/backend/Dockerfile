@@ -1,11 +1,12 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json ./
+RUN npm install
 
 COPY tsconfig.json ./
 COPY src ./src
 
+ENV PORT=8080
 EXPOSE 8080
 CMD ["npm", "run", "dev"]
