@@ -15,7 +15,8 @@
 
 const char* WIFI_SSID = "YOUR_WIFI_SSID";
 const char* WIFI_PASS = "YOUR_WIFI_PASSWORD";
-const char* MQTT_HOST = "192.168.62.205"; // your machine IP or broker IPconst uint16_t MQTT_PORT = 1883;
+const char* MQTT_HOST = "192.168.62.205"; // your machine IP or broker IP
+const uint16_t MQTT_PORT = 1883;
 
 WiFiClient espClient;
 PubSubClient client(espClient);

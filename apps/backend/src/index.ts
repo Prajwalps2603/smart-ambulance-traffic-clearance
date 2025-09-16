@@ -16,6 +16,7 @@ app.get("/health", (_req: Request, res: Response) => res.json({ ok: true }));
 
 app.use("/api/v1/missions", missionsRouter);
 
+
 const PORT = Number(process.env.PORT || 8080);
 const MQTT_BROKER = process.env.MQTT_BROKER_URL || "mqtt://localhost:1883";
 

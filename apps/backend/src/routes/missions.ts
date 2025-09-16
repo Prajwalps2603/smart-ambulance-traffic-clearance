@@ -1,19 +1,19 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { StartMissionSchema, LocationUpdateSchema, Mission } from "../types.js";
-import { naiveEta, directionsEta } from "../services/geo.js";
-import { publish } from "../mqtt.js";
-import { emitMissionUpdate } from "../socket.js";
+import { StartMissionSchema, LocationUpdateSchema, Mission } from "../types";
+import { naiveEta, directionsEta } from "../services/geo";
+import { publish } from "../mqtt";
+import { emitMissionUpdate } from "../socket";
 
 const router = Router();
 
 const missions = new Map<string, Mission>();
 
-router.get("/", (_req, res) => {
+router.get("/", (_req: Request, res: Response) => {
   res.json({ missions: Array.from(missions.values()) });
 });
 
-router.post("/start", async (req, res) => {
+router.post("/start", async (req: Request, res: Response) => {
   const parsed = StartMissionSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.format() });
   const { vehicleId, origin, destination, hospitalName } = parsed.data;
@@ -56,7 +56,7 @@ router.post("/start", async (req, res) => {
   res.json({ missionId, eta });
 });
 
-router.post("/:vehicleId/location", (req, res) => {
+router.post("/:vehicleId/location", (req: Request, res: Response) => {
   const { vehicleId } = req.params;
   const m = missions.get(vehicleId);
   if (!m) return res.status(404).json({ error: "Mission not found for vehicle" });
@@ -83,7 +83,7 @@ router.post("/:vehicleId/location", (req, res) => {
   res.json({ ok: true, eta });
 });
 
-router.post("/:vehicleId/complete", (req, res) => {
+router.post("/:vehicleId/complete", (req: Request, res: Response) => {
   const { vehicleId } = req.params;
   const m = missions.get(vehicleId);
   if (!m) return res.status(404).json({ error: "Mission not found for vehicle" });

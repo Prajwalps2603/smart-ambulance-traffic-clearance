@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { Mission } from "./types.js";
+import { Mission } from "./types";
 
 let io: Server | null = null;
 
